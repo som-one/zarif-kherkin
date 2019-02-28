@@ -1,0 +1,21 @@
+#Gradle
+build/
+.gradle
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+.kotlintest/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+out/
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
