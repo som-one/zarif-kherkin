@@ -1,3 +1,5 @@
+![Bitbucket Pipelines branch](https://img.shields.io/bitbucket/pipelines/Muhatashim/zarif-kherkin/master.svg?label=master)
+
 # Kherkin
 Kerkin is a Kotlin based DSL written with testers, developers, and regular people outside of a team in mind. The inspiration for this project comes from the Gherkin syntax and the Cucumber framework. Howver, there is a huge problem that both of these technologies face, and that is the lack of customizability. This usually leads to long delays in delivering feature files due to not following standards and rewriting code multiple times. Kherkin is designed so that everyone gets the benefit of highly readable feature files, faster development times, and full customizability.
  
