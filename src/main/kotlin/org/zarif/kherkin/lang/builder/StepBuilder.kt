@@ -1,15 +1,39 @@
 package org.zarif.kherkin.lang.builder
 
+import org.zarif.kherkin.lang.KherkinDsl
 import org.zarif.kherkin.lang.construct.StepX
 
-open class StepBuilder {
+@KherkinDsl
+class StepBuilder(val data: List<Map<String, *>> = listOf()) {
     private val steps = mutableListOf<StepX>()
 
     infix fun StepType.the(step: StepX) {
         steps += step
     }
 
-    fun build(): List<StepX>{
+    infix fun StepType.the(stepList: List<StepX>) {
+        steps += stepList
+    }
+
+    infix fun iteration(setup: IterationBuilder.() -> Unit) {
+        data.forEach { datum ->
+            IterationBuilder(datum).also {
+                it.setup()
+                steps += it.build()
+            }
+        }
+    }
+
+    fun iteration(data: List<Map<String, *>> = listOf(), setup: IterationBuilder.() -> Unit) {
+        data.forEach { datum ->
+            IterationBuilder(datum).also {
+                it.setup()
+                steps += it.build()
+            }
+        }
+    }
+
+    fun build(): List<StepX> {
         return steps
     }
 }

@@ -11,7 +11,7 @@ import mu.KotlinLogging
  */
 private val logger = KotlinLogging.logger {}
 
-class FeatureX(
+data class FeatureX(
     val name: String,
     val description: String?,
     val background: BackgroundX?,

@@ -1,6 +1,6 @@
 package org.zarif.kherkin.lang.construct
 
-class StepX(val execution: () -> Unit) {
+data class StepX(val execution: () -> Unit, var datum: Map<String, *> = mapOf<String, Any>()) {
 
     operator fun invoke() {
         execution.invoke()

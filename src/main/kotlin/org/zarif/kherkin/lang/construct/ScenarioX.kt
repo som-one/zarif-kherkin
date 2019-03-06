@@ -4,7 +4,7 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-class ScenarioX(
+data class ScenarioX(
     val name: String,
     val description: String?,
     val steps: MutableList<StepX>
