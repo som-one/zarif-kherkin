@@ -1,24 +1,22 @@
 package org.zarif.kherkin.lang.builder
 
 import org.zarif.kherkin.lang.KherkinDsl
-import org.zarif.kherkin.lang.construct.BackgroundX
+import org.zarif.kherkin.lang.construct.ScenarioX
 import org.zarif.kherkin.lang.construct.StepX
 
+
 @KherkinDsl
-class BackgroundBuilder {
+abstract class AbstractScenarioBuilder {
     private val steps = mutableListOf<StepX>()
     var name: String? = null
     var description: String? = null
-
-    inline fun steps(setup: SimpleStepBuilder.() -> Unit) {
-        addSteps(SimpleStepBuilder().apply(setup).build())
-    }
 
     fun addSteps(step: List<StepX>) {
         steps += step
     }
 
-    fun build(): BackgroundX {
-        return BackgroundX(name, description, steps)
+    fun build(): ScenarioX {
+        requireNotNull(name) { "Scenario name cannot be null!" }
+        return ScenarioX(name!!, description, steps)
     }
 }

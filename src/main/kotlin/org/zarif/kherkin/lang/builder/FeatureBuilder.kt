@@ -16,12 +16,20 @@ class FeatureBuilder {
         background = BackgroundBuilder().apply(setup).build()
     }
 
-    inline fun Scenario(setup: ScenarioBuilder.() -> Unit) {
-        addScenario(ScenarioBuilder().apply(setup).build())
+    inline fun Example(examples: List<Map<String, *>>, setup: ExampleScenarioBuilder.() -> Unit) {
+        require(!examples.isEmpty()) { "There must be at least one example in the provided examples argument." }
+
+        examples.forEach {
+            addScenario(ExampleScenarioBuilder(it).apply(setup).build())
+        }
     }
 
-    inline fun fScenario(setup: ScenarioBuilder.() -> Unit) {
-        ScenarioBuilder().apply(setup).build().also { x ->
+    inline fun Scenario(setup: SimpleScenarioBuilder.() -> Unit) {
+        addScenario(SimpleScenarioBuilder().apply(setup).build())
+    }
+
+    inline fun fScenario(setup: SimpleScenarioBuilder.() -> Unit) {
+        SimpleScenarioBuilder().apply(setup).build().also { x ->
             addScenario(x)
             requireNotNull(background) {
                 "Background must be defined before scenario in order to run a specific scenario"
@@ -30,8 +38,8 @@ class FeatureBuilder {
         }
     }
 
-    fun addScenario(scenario: ScenarioX) {
-        scenarios.add(scenario)
+    fun addScenario(vararg scenario: ScenarioX) {
+        scenarios += scenario
     }
 
     fun build(): FeatureX {

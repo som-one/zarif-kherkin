@@ -6,32 +6,20 @@ import org.zarif.kherkin.lang.definition.`duck is logged in`
 import org.zarif.kherkin.lang.definition.`duck is on sign in page`
 import org.zarif.kherkin.lang.definition.`duck sees the homepage`
 
-val backgroundTest =
+val exampleTest =
     Feature {
-        name = "Feature to test background"
+        name = "Feature to test examples"
         Background {
-            name = "Background name"
             steps {
                 Given the `duck is on sign in page`
             }
         }
-        Scenario {
-            name = "Scenario 1"
+        Example(csv("/data/user-pass.csv")) {
+            name = "Test examples"
             steps {
                 When the `duck enters the following credentials`(
-                    username = "user",
-                    password = "pass"
-                )
-                Then the `duck is logged in`
-                And the `duck sees the homepage`
-            }
-        }
-        Scenario {
-            name = "Scenario 2"
-            steps {
-                When the `duck enters the following credentials`(
-                    username = "user2",
-                    password = "pass2"
+                    username = "user" from examples,
+                    password = "pass" from examples
                 )
                 Then the `duck is logged in`
                 And the `duck sees the homepage`

@@ -8,20 +8,16 @@ import org.zarif.kherkin.lang.definition.`duck sees the homepage`
 
 val iterationTest =
     Feature {
-        name = "Some Feature"
-        description = "This feature does a lot of cool stuff"
+        name = "Feature to test iterations"
         Background {
-            name = "Background name"
             steps {
                 Given the `duck is on sign in page`
             }
         }
         Scenario {
-            name = "Scenario name 1"
-            description = "This scenario does the really cool stuff"
-            data = csv("/data/user-pass.csv")
+            name = "Test iterations"
             steps {
-                iteration {
+                iterate(csv("/data/user-pass.csv")) {
                     When the `duck enters the following credentials`(
                         username = "user" from iteration,
                         password = "pass" from iteration

@@ -6,6 +6,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.shouldNotBe
 import io.kotlintest.specs.StringSpec
 import org.zarif.kherkin.lang.script.backgroundTest
+import org.zarif.kherkin.lang.script.exampleTest
 import org.zarif.kherkin.lang.script.iterationTest
 
 /**
@@ -28,6 +29,13 @@ class TestBackground : StringSpec() {
             iterationTest.scenarios[0].steps.size shouldBe 4 * 3
             iterationTest.background shouldNotBe null
             iterationTest()
+        }
+
+        "verify examples" {
+            exampleTest.scenarios shouldHaveSize 4
+            exampleTest.scenarios.forEach { it.steps shouldHaveSize 3 }
+            exampleTest.background shouldNotBe null
+            exampleTest()
         }
     }
 }
