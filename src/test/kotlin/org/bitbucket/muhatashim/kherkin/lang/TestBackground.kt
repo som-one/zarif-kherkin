@@ -4,9 +4,9 @@ import io.kotlintest.matchers.collections.shouldHaveSize
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldNotBe
 import io.kotlintest.specs.StringSpec
-import org.zarif.kherkin.lang.script.backgroundTest
-import org.zarif.kherkin.lang.script.exampleTest
-import org.zarif.kherkin.lang.script.iterationTest
+import org.bitbucket.muhatashim.kherkin.lang.script.backgroundTest
+import org.bitbucket.muhatashim.kherkin.lang.script.exampleTest
+import org.bitbucket.muhatashim.kherkin.lang.script.iterationTest
 
 /**
  * Created with IntelliJ IDEA.

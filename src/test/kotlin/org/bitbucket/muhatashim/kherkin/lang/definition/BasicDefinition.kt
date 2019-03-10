@@ -1,6 +1,6 @@
 package org.bitbucket.muhatashim.kherkin.lang.definition
 
-import org.zarif.kherkin.lang.builder.step
+import org.bitbucket.muhatashim.kherkin.lang.builder.step
 import java.util.logging.Level
 import java.util.logging.Logger
 

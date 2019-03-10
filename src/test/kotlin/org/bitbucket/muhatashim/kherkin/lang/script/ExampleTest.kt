@@ -1,10 +1,10 @@
 package org.bitbucket.muhatashim.kherkin.lang.script
 
-import org.zarif.kherkin.lang.builder.*
-import org.zarif.kherkin.lang.definition.`duck enters the following credentials`
-import org.zarif.kherkin.lang.definition.`duck is logged in`
-import org.zarif.kherkin.lang.definition.`duck is on sign in page`
-import org.zarif.kherkin.lang.definition.`duck sees the homepage`
+import org.bitbucket.muhatashim.kherkin.lang.builder.*
+import org.bitbucket.muhatashim.kherkin.lang.definition.`duck enters the following credentials`
+import org.bitbucket.muhatashim.kherkin.lang.definition.`duck is logged in`
+import org.bitbucket.muhatashim.kherkin.lang.definition.`duck is on sign in page`
+import org.bitbucket.muhatashim.kherkin.lang.definition.`duck sees the homepage`
 
 val exampleTest =
     Feature {
