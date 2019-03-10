@@ -21,7 +21,7 @@ fun main() {
 class KherkinRunner(vararg val features: FeatureX) {
 
     fun invokeAndLog() {
-        invokeAndLog(File("C:\\Users\\Muhatashim\\IdeaProjects\\untitled7\\" +"kherkin-results.json"))
+        invokeAndLog(File(System.getProperty("user.dir") + File.separator + "kherkin-results.json"))
     }
 
     fun invokeAndLog(file: File) {
