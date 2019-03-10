@@ -1,10 +1,22 @@
 ![Bitbucket Pipelines branch](https://img.shields.io/bitbucket/pipelines/Muhatashim/zarif-kherkin/master.svg?label=master)
-
+![Maven Central](https://img.shields.io/maven-central/v/org.bitbucket.muhatashim/zarif-kherkin.svg?label=zarif-kherkin)
+      
 # Kherkin
 Kerkin is a Kotlin based DSL written with testers, developers, and regular people outside of a team in mind. The inspiration for this project comes from the Gherkin syntax and the Cucumber framework. Howver, there is a huge problem that both of these technologies face, and that is the lack of customizability. This usually leads to long delays in delivering feature files due to not following standards and rewriting code multiple times. Kherkin is designed so that everyone gets the benefit of highly readable feature files, faster development times, and full customizability.
  
 # Getting Started
-//TODO
+Gradle:
+```groovy
+testCompile "org.bitbucket.muhatashim:zarif-kherkin:1.0.0-RELEASE"
+```
+Maven:
+```xml
+<dependency>
+  <groupId>org.bitbucket.muhatashim</groupId>
+  <artifactId>zarif-kherkin</artifactId>
+  <version>1.0.0-RELEASE</version>
+</dependency>
+```
 
 # Examples
 ```Kotlin
