@@ -36,8 +36,7 @@ class StringLogHandler : Handler() {
     val logs: MutableList<String> = mutableListOf()
     override fun publish(record: LogRecord) {
         logs.add(
-            "[${record.level}] ${record.instant} " +
-                    "${record.sourceClassName}#${record.sourceMethodName}: ${record.message}"
+            "[${record.level}] ${record.sourceClassName}#${record.sourceMethodName}: ${record.message}"
         )
     }
 
