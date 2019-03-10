@@ -3,9 +3,9 @@ package org.bitbucket.muhatashim.kherkin.lang.builder
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
 import org.apache.commons.csv.CSVRecord
-import org.zarif.kherkin.lang.meta.EmbeddingMeta
-import org.zarif.kherkin.lang.meta.ResultMeta
-import org.zarif.kherkin.lang.meta.StatusMeta
+import org.bitbucket.muhatashim.kherkin.lang.meta.EmbeddingMeta
+import org.bitbucket.muhatashim.kherkin.lang.meta.ResultMeta
+import org.bitbucket.muhatashim.kherkin.lang.meta.StatusMeta
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.nio.charset.Charset

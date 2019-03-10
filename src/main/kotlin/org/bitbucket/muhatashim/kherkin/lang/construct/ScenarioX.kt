@@ -1,9 +1,9 @@
 package org.bitbucket.muhatashim.kherkin.lang.construct
 
 import mu.KotlinLogging
-import org.zarif.kherkin.lang.builder.cast
-import org.zarif.kherkin.lang.builder.createEmbedding
-import org.zarif.kherkin.lang.meta.ScenarioMeta
+import org.bitbucket.muhatashim.kherkin.lang.builder.cast
+import org.bitbucket.muhatashim.kherkin.lang.builder.createEmbedding
+import org.bitbucket.muhatashim.kherkin.lang.meta.ScenarioMeta
 
 private val logger = KotlinLogging.logger {}
 

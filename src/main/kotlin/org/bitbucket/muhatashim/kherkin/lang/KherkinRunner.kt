@@ -3,8 +3,8 @@ package org.bitbucket.muhatashim.kherkin.lang
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import org.zarif.kherkin.lang.construct.FeatureX
-import org.zarif.kherkin.lang.meta.FeatureMeta
+import org.bitbucket.muhatashim.kherkin.lang.construct.FeatureX
+import org.bitbucket.muhatashim.kherkin.lang.meta.FeatureMeta
 import java.io.File
 import java.io.Writer
 

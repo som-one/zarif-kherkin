@@ -1,10 +1,9 @@
 package org.bitbucket.muhatashim.kherkin.lang.builder
 
-import org.bitbucket.muhatashim.kherkin.lang.KherkinDsl
-import org.zarif.kherkin.lang.construct.ScenarioX
-import org.zarif.kherkin.lang.construct.StepX
-import org.zarif.kherkin.lang.meta.ScenarioMeta
-import org.zarif.kherkin.lang.meta.TagMeta
+import org.bitbucket.muhatashim.kherkin.lang.construct.ScenarioX
+import org.bitbucket.muhatashim.kherkin.lang.construct.StepX
+import org.bitbucket.muhatashim.kherkin.lang.meta.ScenarioMeta
+import org.bitbucket.muhatashim.kherkin.lang.meta.TagMeta
 
 
 @org.bitbucket.muhatashim.kherkin.lang.KherkinDsl

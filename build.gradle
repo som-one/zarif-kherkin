@@ -112,8 +112,8 @@ def customizePom(pom) {
             name 'Kherkin'
             url 'https://bitbucket.org/Muhatashim/zarif-kherkin/'
             organization {
-                name 'com.github.mautini'
-                url 'https://github.com/mautini'
+                name 'org.bitbucket.muhatashim'
+                url 'https://bitbucket.org/Muhatashim'
             }
             issueManagement {
                 system 'Bitbucket'
@@ -127,9 +127,8 @@ def customizePom(pom) {
                 }
             }
             scm {
-                url 'https://github.com/mautini/schemaorg-java'
-                connection 'scm:git:git://github.com/mautini/schemaorg-java.git'
-                developerConnection 'scm:git:ssh://git@github.com:mautini/schemaorg-java.git'
+                url 'https://bitbucket.org/Muhatashim/zarif-kherkin/'
+                connection 'scm:git:git://bitbucket.org/Muhatashim/zarif-kherkin.git'
             }
             developers {
                 developer {

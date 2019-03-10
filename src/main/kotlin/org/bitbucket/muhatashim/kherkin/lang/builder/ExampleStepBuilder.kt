@@ -1,9 +1,9 @@
 package org.bitbucket.muhatashim.kherkin.lang.builder
 
 import org.bitbucket.muhatashim.kherkin.lang.KherkinDsl
-import org.zarif.kherkin.lang.construct.StepX
+import org.bitbucket.muhatashim.kherkin.lang.construct.StepX
 
-@org.bitbucket.muhatashim.kherkin.lang.KherkinDsl
+@KherkinDsl
 class ExampleStepBuilder(val example: Map<String, *> = mapOf<String, Any>()) : AbstractStepBuilder() {
     inline infix fun <reified R> String.from(ignored: examples): R {
         val value = requireNotNull(example[this]) {

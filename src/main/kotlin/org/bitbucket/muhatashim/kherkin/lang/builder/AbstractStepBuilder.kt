@@ -1,8 +1,7 @@
 package org.bitbucket.muhatashim.kherkin.lang.builder
 
-import org.bitbucket.muhatashim.kherkin.lang.KherkinDsl
-import org.zarif.kherkin.lang.construct.StepX
-import org.zarif.kherkin.lang.meta.*
+import org.bitbucket.muhatashim.kherkin.lang.construct.StepX
+import org.bitbucket.muhatashim.kherkin.lang.meta.*
 
 @org.bitbucket.muhatashim.kherkin.lang.KherkinDsl
 abstract class AbstractStepBuilder {

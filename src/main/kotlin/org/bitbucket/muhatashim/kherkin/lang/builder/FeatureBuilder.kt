@@ -1,11 +1,11 @@
 package org.bitbucket.muhatashim.kherkin.lang.builder
 
 import org.bitbucket.muhatashim.kherkin.lang.KherkinDsl
-import org.zarif.kherkin.lang.construct.*
-import org.zarif.kherkin.lang.meta.FeatureMeta
-import org.zarif.kherkin.lang.meta.TagMeta
+import org.bitbucket.muhatashim.kherkin.lang.construct.*
+import org.bitbucket.muhatashim.kherkin.lang.meta.FeatureMeta
+import org.bitbucket.muhatashim.kherkin.lang.meta.TagMeta
 
-@org.bitbucket.muhatashim.kherkin.lang.KherkinDsl
+@KherkinDsl
 class FeatureBuilder(val callSite: StackTraceElement) {
     private val scenarios = mutableListOf<ScenarioX>()
     var background: BackgroundX? = null

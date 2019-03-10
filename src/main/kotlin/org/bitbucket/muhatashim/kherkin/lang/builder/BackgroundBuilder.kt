@@ -1,11 +1,11 @@
 package org.bitbucket.muhatashim.kherkin.lang.builder
 
 import org.bitbucket.muhatashim.kherkin.lang.KherkinDsl
-import org.zarif.kherkin.lang.construct.BackgroundX
-import org.zarif.kherkin.lang.construct.StepX
-import org.zarif.kherkin.lang.meta.BackgroundMeta
+import org.bitbucket.muhatashim.kherkin.lang.construct.BackgroundX
+import org.bitbucket.muhatashim.kherkin.lang.construct.StepX
+import org.bitbucket.muhatashim.kherkin.lang.meta.BackgroundMeta
 
-@org.bitbucket.muhatashim.kherkin.lang.KherkinDsl
+@KherkinDsl
 class BackgroundBuilder {
     private val steps = mutableListOf<StepX>()
     var name: String? = null

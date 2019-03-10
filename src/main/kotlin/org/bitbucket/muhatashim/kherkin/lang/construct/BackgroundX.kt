@@ -1,7 +1,7 @@
 package org.bitbucket.muhatashim.kherkin.lang.construct
 
 import mu.KotlinLogging
-import org.zarif.kherkin.lang.meta.BackgroundMeta
+import org.bitbucket.muhatashim.kherkin.lang.meta.BackgroundMeta
 
 private val logger = KotlinLogging.logger {}
 

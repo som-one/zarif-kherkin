@@ -1,9 +1,9 @@
 package org.bitbucket.muhatashim.kherkin.lang.construct
 
-import org.zarif.kherkin.lang.builder.createEmbedding
-import org.zarif.kherkin.lang.builder.runAndGetResult
-import org.zarif.kherkin.lang.meta.StatusMeta
-import org.zarif.kherkin.lang.meta.StepMeta
+import org.bitbucket.muhatashim.kherkin.lang.builder.createEmbedding
+import org.bitbucket.muhatashim.kherkin.lang.builder.runAndGetResult
+import org.bitbucket.muhatashim.kherkin.lang.meta.StatusMeta
+import org.bitbucket.muhatashim.kherkin.lang.meta.StepMeta
 import java.util.logging.Handler
 import java.util.logging.LogRecord
 import java.util.logging.Logger

@@ -1,9 +1,9 @@
 package org.bitbucket.muhatashim.kherkin.lang.builder
 
 import org.bitbucket.muhatashim.kherkin.lang.KherkinDsl
-import org.zarif.kherkin.lang.construct.StepX
+import org.bitbucket.muhatashim.kherkin.lang.construct.StepX
 
-@org.bitbucket.muhatashim.kherkin.lang.KherkinDsl
+@KherkinDsl
 class IterationBuilder(val datum: Map<String, *> = mapOf<String, Any>()) {
     private val steps = mutableListOf<StepX>()
 
