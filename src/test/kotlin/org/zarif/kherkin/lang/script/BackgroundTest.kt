@@ -12,7 +12,7 @@ val backgroundTest =
         Background {
             name = "Background name"
             steps {
-                Given the `duck is on sign in page`
+                Given the `duck is on sign in page`()
             }
         }
         Scenario {
@@ -22,8 +22,8 @@ val backgroundTest =
                     username = "user",
                     password = "pass"
                 )
-                Then the `duck is logged in`
-                And the `duck sees the homepage`
+                Then the `duck is logged in`()
+                And the `duck sees the homepage`()
             }
         }
         Scenario {
@@ -33,8 +33,8 @@ val backgroundTest =
                     username = "user2",
                     password = "pass2"
                 )
-                Then the `duck is logged in`
-                And the `duck sees the homepage`
+                Then the `duck is logged in`()
+                And the `duck sees the homepage`()
             }
         }
     }

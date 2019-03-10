@@ -11,7 +11,7 @@ val exampleTest =
         name = "Feature to test examples"
         Background {
             steps {
-                Given the `duck is on sign in page`
+                Given the `duck is on sign in page`()
             }
         }
         Example(csv("/data/user-pass.csv")) {
@@ -21,8 +21,8 @@ val exampleTest =
                     username = "user" from examples,
                     password = "pass" from examples
                 )
-                Then the `duck is logged in`
-                And the `duck sees the homepage`
+                Then the `duck is logged in`()
+                And the `duck sees the homepage`()
             }
         }
     }

@@ -11,7 +11,7 @@ val iterationTest =
         name = "Feature to test iterations"
         Background {
             steps {
-                Given the `duck is on sign in page`
+                Given the `duck is on sign in page`()
             }
         }
         Scenario {
@@ -22,8 +22,8 @@ val iterationTest =
                         username = "user" from iteration,
                         password = "pass" from iteration
                     )
-                    Then the `duck is logged in`
-                    And the `duck sees the homepage`
+                    Then the `duck is logged in`()
+                    And the `duck sees the homepage`()
                 }
             }
         }

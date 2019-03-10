@@ -4,9 +4,10 @@ import org.zarif.kherkin.lang.KherkinDsl
 
 
 @KherkinDsl
-class ExampleScenarioBuilder(var example: Map<String, *>): AbstractScenarioBuilder() {
+class ExampleScenarioBuilder(var example: Map<String, *>, callSite: StackTraceElement) :
+    AbstractScenarioBuilder(callSite) {
 
-    inline fun steps(setup: ExampleStepBuilder.() -> Unit) {
+    fun steps(setup: ExampleStepBuilder.() -> Unit) {
         addSteps(ExampleStepBuilder(example).apply(setup).build())
     }
 }

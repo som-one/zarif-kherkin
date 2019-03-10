@@ -1,6 +1,7 @@
 package org.zarif.kherkin.lang.construct
 
 import mu.KotlinLogging
+import org.zarif.kherkin.lang.meta.FeatureMeta
 
 
 /**
@@ -15,14 +16,16 @@ data class FeatureX(
     val name: String,
     val description: String?,
     val background: BackgroundX?,
-    val scenarios: MutableList<ScenarioX>
+    val scenarios: MutableList<ScenarioX>,
+    var meta: FeatureMeta
 ) {
 
-    operator fun invoke() {
+    operator fun invoke(hooks: Hooks = Hooks()) {
+        val allHooks = GlobalHooks + hooks
         logger.debug { "- Feature: $name: $description" }
         scenarios.forEach {
             background?.invoke()
-            it()
+            it(allHooks)
         }
     }
 }

@@ -4,7 +4,7 @@ import org.zarif.kherkin.lang.KherkinDsl
 
 
 @KherkinDsl
-class SimpleScenarioBuilder : AbstractScenarioBuilder() {
+class SimpleScenarioBuilder(callSite: StackTraceElement) : AbstractScenarioBuilder(callSite) {
 
     inline fun steps(setup: SimpleStepBuilder.() -> Unit) {
         addSteps(SimpleStepBuilder().apply(setup).build())

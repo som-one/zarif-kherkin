@@ -3,6 +3,11 @@ package org.zarif.kherkin.lang.builder
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
 import org.apache.commons.csv.CSVRecord
+import org.zarif.kherkin.lang.meta.EmbeddingMeta
+import org.zarif.kherkin.lang.meta.ResultMeta
+import org.zarif.kherkin.lang.meta.StatusMeta
+import java.io.PrintWriter
+import java.io.StringWriter
 import java.nio.charset.Charset
 import java.text.SimpleDateFormat
 import java.util.*
@@ -40,4 +45,29 @@ inline fun <reified R> cast(value: Any, lazyErrorMessage: () -> String): R {
             value
         }
     } as R
+}
+
+fun <P> runAndGetResult(instance: P, execution: P.() -> Unit): ResultMeta {
+    val result = ResultMeta()
+    val startTime = System.currentTimeMillis()
+    try {
+        instance.execution()
+    } catch (t: Throwable) {
+        val stringWriter = StringWriter()
+        PrintWriter(stringWriter).use {
+            t.printStackTrace(it)
+        }
+        result.error_message = stringWriter.toString()
+    } finally {
+        result.duration = System.currentTimeMillis() - startTime
+        result.status = result.error_message?.let { StatusMeta.failed } ?: StatusMeta.passed
+        return result
+    }
+}
+
+fun createEmbedding(bytes: ByteArray, mimeType: String): EmbeddingMeta {
+    return EmbeddingMeta(
+        data = Base64.getEncoder().encodeToString(bytes),
+        mime_type = mimeType
+    )
 }

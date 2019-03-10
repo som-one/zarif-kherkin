@@ -3,6 +3,7 @@ package org.zarif.kherkin.lang.builder
 import org.zarif.kherkin.lang.KherkinDsl
 import org.zarif.kherkin.lang.construct.BackgroundX
 import org.zarif.kherkin.lang.construct.StepX
+import org.zarif.kherkin.lang.meta.BackgroundMeta
 
 @KherkinDsl
 class BackgroundBuilder {
@@ -19,6 +20,14 @@ class BackgroundBuilder {
     }
 
     fun build(): BackgroundX {
-        return BackgroundX(name, description, steps)
+        return BackgroundX(
+            name, description, steps, BackgroundMeta(
+                name = name ?: "",
+                description = description ?: "",
+                keyword = "Background",
+                type = "background",
+                steps = steps.map { it.meta }.toMutableList()
+            )
+        )
     }
 }

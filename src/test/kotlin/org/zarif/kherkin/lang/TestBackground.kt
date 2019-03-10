@@ -1,6 +1,5 @@
 package org.zarif.kherkin.lang
 
-import io.kotlintest.TestCaseConfig
 import io.kotlintest.matchers.collections.shouldHaveSize
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldNotBe
@@ -16,7 +15,6 @@ import org.zarif.kherkin.lang.script.iterationTest
  * Time: 12:31 AM
  */
 class TestBackground : StringSpec() {
-    override val defaultTestCaseConfig: TestCaseConfig = TestCaseConfig(threads = 3)
 
     init {
         "verify background" {
