@@ -7,7 +7,7 @@ Kerkin is a Kotlin based DSL written with testers, developers, and regular peopl
 # Getting Started
 Gradle:
 ```groovy
-testCompile "org.bitbucket.muhatashim:zarif-kherkin:1.0.0-RELEASE"
+testCompile "org.bitbucket.muhatashim:zarif-kherkin:1.1.0"
 ```
 Maven:
 ```xml
