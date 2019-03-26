@@ -15,17 +15,27 @@ data class StepX(
     val datum: Map<String, *> = mapOf<String, Any>(),
     var meta: StepMeta = StepMeta()
 ) {
+    var scenario: ScenarioX? = null
 
-    operator fun invoke(hooks: Hooks): Boolean {
+    operator fun invoke(hooks: Hooks, callingScenario: ScenarioX?): Boolean {
         val logHandler = StringLogHandler()
+        val thisStep = callingScenario?.let { this.copy().apply { scenario = it } } ?: this
 
-        hooks.beforeSteps.forEach { it.invoke(this@StepX) }
+        hooks.beforeSteps.forEach { it.invoke(thisStep) }
         Logger.getGlobal().addHandler(logHandler)
-        meta.result = runAndGetResult(this, execution)
+        meta.result = runAndGetResult(thisStep, execution)
         Logger.getGlobal().removeHandler(logHandler)
-        hooks.afterSteps.forEach { it.invoke(this@StepX) }
+        hooks.afterSteps.forEach { it.invoke(thisStep) }
         meta.outputs!!.addAll(logHandler.logs)
         return meta.result!!.status == StatusMeta.passed
+    }
+
+    inline fun <reified K> getContext(key: Key<K>): K? {
+        return requireNotNull(scenario) { "Scenario must be defined for this step" }.fromContext(key)
+    }
+
+    fun putContext(key: Key<*>, value: Any) {
+        requireNotNull(scenario) { "Scenario must be defined for this step" }.putContext(key, value)
     }
 
     fun embed(bytes: ByteArray, mimeType: String) {

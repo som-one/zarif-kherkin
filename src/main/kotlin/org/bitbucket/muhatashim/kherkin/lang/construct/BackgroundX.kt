@@ -17,7 +17,7 @@ data class BackgroundX(
 
         logger.debug { "-- Background: ${name ?: "unnamed"}: ${description ?: "no description"}" }
         steps.forEach {
-            it(allHooks)
+            it(allHooks, null)
         }
     }
 }

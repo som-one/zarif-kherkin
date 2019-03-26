@@ -40,7 +40,7 @@ class FeatureBuilder(val callSite: StackTraceElement) {
             requireNotNull(background) {
                 "Background must be defined before scenario in order to run a specific scenario"
             }()
-            scenario(allHooks)
+            scenario(allHooks, build())
         }
     }
 

@@ -25,7 +25,7 @@ data class FeatureX(
         logger.debug { "- Feature: $name: $description" }
         scenarios.forEach {
             background?.invoke()
-            it(allHooks)
+            it(allHooks, this)
         }
     }
 }
