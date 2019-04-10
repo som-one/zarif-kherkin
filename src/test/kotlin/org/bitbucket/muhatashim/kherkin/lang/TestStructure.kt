@@ -24,7 +24,7 @@ class TestStructure : StringSpec() {
         }
 
         "verify iterations" {
-            iterationTest.scenarios[0].steps.size shouldBe 4 * 3
+            iterationTest.scenarios[0].steps.size shouldBe 4 * 2 + 1
             iterationTest.background shouldNotBe null
             iterationTest()
         }
