@@ -1,5 +1,7 @@
 package org.bitbucket.muhatashim.kherkin.lang.construct
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
 import org.bitbucket.muhatashim.kherkin.lang.builder.createEmbedding
 import org.bitbucket.muhatashim.kherkin.lang.meta.ResultMeta
 import org.bitbucket.muhatashim.kherkin.lang.meta.StatusMeta
@@ -11,15 +13,22 @@ import java.util.logging.LogRecord
 import java.util.logging.Logger
 
 data class StepX(
-    val execution: StepX.() -> Unit,
+    val execution: suspend StepX.() -> Unit,
     val datum: Map<String, *> = mapOf<String, Any>(),
-    var meta: StepMeta = StepMeta()
+    var meta: StepMeta = StepMeta(),
+    val currentScope: CoroutineScope = GlobalScope
 ) {
     var scenario: ScenarioX? = null
 
-    operator fun invoke(hooks: Hooks, callingScenario: ScenarioX?): Boolean {
+    suspend operator fun invoke(
+        hooks: Hooks,
+        callingScenario: ScenarioX?,
+        coroutineScope: CoroutineScope? = null
+    ): Boolean {
         val logHandler = StringLogHandler()
-        val thisStep = callingScenario?.let { this.copy().apply { scenario = it } } ?: this
+        val thisStep = this.copy(currentScope = coroutineScope ?: GlobalScope).apply {
+            callingScenario?.let { scenario = it }
+        }
 
         hooks.beforeSteps.forEach { it.invoke(thisStep) }
         Logger.getGlobal().addHandler(logHandler)
@@ -34,13 +43,17 @@ data class StepX(
         return requireNotNull(scenario) { "Scenario must be defined for this step" }.fromContext(key)
     }
 
-    fun putContext(key: Key<*>, value: Any) {
+    fun <T> putContext(key: Key<T>, value: T) {
         requireNotNull(scenario) { "Scenario must be defined for this step" }.putContext(key, value)
     }
 
     fun embed(bytes: ByteArray, mimeType: String) {
         if (meta.embeddings == null) meta.embeddings = mutableListOf()
         meta.embeddings!!.add(createEmbedding(bytes, mimeType))
+    }
+
+    fun getCoroutine(): GlobalScope {
+        return GlobalScope
     }
 }
 
@@ -60,10 +73,11 @@ class StringLogHandler : Handler() {
 }
 
 
-fun <P> runAndGetResult(instance: P, execution: P.() -> Unit): ResultMeta {
+suspend fun <P> runAndGetResult(instance: P, execution: suspend P.() -> Unit): ResultMeta {
     val result = ResultMeta()
     val startTime = System.currentTimeMillis()
     try {
+
         instance.execution()
     } catch (t: Throwable) {
         val stringWriter = StringWriter()

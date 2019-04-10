@@ -1,4 +1,4 @@
-package org.bitbucket.muhatashim.kherkin.lang
+package org.bitbucket.muhatashim.kherkin.lang.builder
 
 /**
  * Created with IntelliJ IDEA.

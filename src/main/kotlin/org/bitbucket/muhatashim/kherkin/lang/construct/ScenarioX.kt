@@ -1,5 +1,6 @@
 package org.bitbucket.muhatashim.kherkin.lang.construct
 
+import kotlinx.coroutines.CoroutineScope
 import mu.KotlinLogging
 import org.bitbucket.muhatashim.kherkin.lang.builder.cast
 import org.bitbucket.muhatashim.kherkin.lang.builder.createEmbedding
@@ -17,7 +18,7 @@ data class ScenarioX(
     lateinit var feature: FeatureX
     lateinit var scenarioContext: MutableMap<Int, Any>
 
-    operator fun invoke(hooks: Hooks, callingFeature: FeatureX) {
+    suspend operator fun invoke(hooks: Hooks, callingFeature: FeatureX, coroutineScope: CoroutineScope? = null) {
         logger.debug { "-- Scenario: $name: $description" }
         val thisScenario = this@ScenarioX.copy().apply {
             feature = callingFeature
@@ -25,7 +26,7 @@ data class ScenarioX(
         }
         hooks.beforeScenarios.forEach { it.invoke(thisScenario) }
         for (it in steps) {
-            if (!it(hooks, thisScenario)) {
+            if (!it(hooks, thisScenario, coroutineScope)) {
                 break
             }
         }
@@ -43,9 +44,9 @@ data class ScenarioX(
         }
     }
 
-    fun putContext(key: Key<*>, value: Any) {
+    fun <T> putContext(key: Key<T>, value: T) {
         val realKey = System.identityHashCode(key)
-        scenarioContext[realKey] = value
+        scenarioContext[realKey] = value as Any
     }
 
     fun embed(bytes: ByteArray, mimeType: String) {

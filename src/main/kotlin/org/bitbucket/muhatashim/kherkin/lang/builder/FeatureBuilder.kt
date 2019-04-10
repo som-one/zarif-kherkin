@@ -1,6 +1,5 @@
 package org.bitbucket.muhatashim.kherkin.lang.builder
 
-import org.bitbucket.muhatashim.kherkin.lang.KherkinDsl
 import org.bitbucket.muhatashim.kherkin.lang.construct.*
 import org.bitbucket.muhatashim.kherkin.lang.meta.FeatureMeta
 import org.bitbucket.muhatashim.kherkin.lang.meta.TagMeta
@@ -32,7 +31,7 @@ class FeatureBuilder(val callSite: StackTraceElement) {
         addScenario(SimpleScenarioBuilder(scenarioCallSite).apply(setup).build())
     }
 
-    inline fun fScenario(hooks: Hooks = Hooks(), setup: SimpleScenarioBuilder.() -> Unit) {
+    suspend inline fun fScenario(hooks: Hooks = Hooks(), setup: SimpleScenarioBuilder.() -> Unit) {
         val allHooks = GlobalHooks + hooks
         val scenarioCallSite = Thread.currentThread().stackTrace[2]
         SimpleScenarioBuilder(scenarioCallSite).apply(setup).build().also { scenario ->
