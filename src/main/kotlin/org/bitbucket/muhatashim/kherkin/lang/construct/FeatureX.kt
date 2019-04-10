@@ -1,5 +1,6 @@
 package org.bitbucket.muhatashim.kherkin.lang.construct
 
+import kotlinx.coroutines.CoroutineScope
 import mu.KotlinLogging
 import org.bitbucket.muhatashim.kherkin.lang.meta.FeatureMeta
 
@@ -20,12 +21,12 @@ data class FeatureX(
     var meta: FeatureMeta
 ) {
 
-    operator fun invoke(hooks: Hooks = Hooks()) {
+    suspend operator fun invoke(hooks: Hooks = Hooks(), coroutineScope: CoroutineScope? = null) {
         val allHooks = GlobalHooks + hooks
         logger.debug { "- Feature: $name: $description" }
         scenarios.forEach {
             background?.invoke()
-            it(allHooks)
+            it(allHooks, this, coroutineScope)
         }
     }
 }

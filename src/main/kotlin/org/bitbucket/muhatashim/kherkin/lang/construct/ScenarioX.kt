@@ -1,5 +1,6 @@
 package org.bitbucket.muhatashim.kherkin.lang.construct
 
+import kotlinx.coroutines.CoroutineScope
 import mu.KotlinLogging
 import org.bitbucket.muhatashim.kherkin.lang.builder.cast
 import org.bitbucket.muhatashim.kherkin.lang.builder.createEmbedding
@@ -14,17 +15,38 @@ data class ScenarioX(
     var extra: Map<String, *> = mapOf<String, String>(),
     var meta: ScenarioMeta
 ) {
+    lateinit var feature: FeatureX
+    lateinit var scenarioContext: MutableMap<Int, Any>
 
-    operator fun invoke(hooks: Hooks) {
+    suspend operator fun invoke(hooks: Hooks, callingFeature: FeatureX, coroutineScope: CoroutineScope? = null) {
         logger.debug { "-- Scenario: $name: $description" }
-
-        hooks.beforeScenarios.forEach { it.invoke(this@ScenarioX) }
+        val thisScenario = this@ScenarioX.copy().apply {
+            feature = callingFeature
+            scenarioContext = mutableMapOf()
+        }
+        hooks.beforeScenarios.forEach { it.invoke(thisScenario) }
         for (it in steps) {
-            if (!it(hooks)) {
+            if (!it(hooks, thisScenario, coroutineScope)) {
                 break
             }
         }
-        hooks.afterScenarios.forEach { it.invoke(this@ScenarioX) }
+        hooks.afterScenarios.forEach { it.invoke(thisScenario) }
+    }
+
+    inline fun <reified K> fromContext(key: Key<K>): K? {
+        val realKey = System.identityHashCode(key)
+        return scenarioContext[realKey]?.let {
+            require(it is K) {
+                "Context variable found, but the found value does not match the required type " +
+                        "\"${K::class.java.name}\""
+            }
+            return it
+        }
+    }
+
+    fun <T> putContext(key: Key<T>, value: T) {
+        val realKey = System.identityHashCode(key)
+        scenarioContext[realKey] = value as Any
     }
 
     fun embed(bytes: ByteArray, mimeType: String) {
@@ -37,3 +59,5 @@ data class ScenarioX(
         return cast(extra) { "$key is not a type of ${T::class}" }
     }
 }
+
+class Key<T>

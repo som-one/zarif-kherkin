@@ -14,7 +14,7 @@ import org.bitbucket.muhatashim.kherkin.lang.script.iterationTest
  * Date: 2/28/2019
  * Time: 12:31 AM
  */
-class TestBackground : StringSpec() {
+class TestStructure : StringSpec() {
 
     init {
         "verify background" {
@@ -24,7 +24,7 @@ class TestBackground : StringSpec() {
         }
 
         "verify iterations" {
-            iterationTest.scenarios[0].steps.size shouldBe 4 * 3
+            iterationTest.scenarios[0].steps.size shouldBe 4 * 2 + 1
             iterationTest.background shouldNotBe null
             iterationTest()
         }

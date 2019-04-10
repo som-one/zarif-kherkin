@@ -1,6 +1,5 @@
 package org.bitbucket.muhatashim.kherkin.lang.builder
 
-import org.bitbucket.muhatashim.kherkin.lang.KherkinDsl
 import org.bitbucket.muhatashim.kherkin.lang.construct.BackgroundX
 import org.bitbucket.muhatashim.kherkin.lang.construct.StepX
 import org.bitbucket.muhatashim.kherkin.lang.meta.BackgroundMeta

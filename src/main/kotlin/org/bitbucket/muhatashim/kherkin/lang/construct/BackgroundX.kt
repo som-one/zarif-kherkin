@@ -12,12 +12,12 @@ data class BackgroundX(
     var meta: BackgroundMeta
 ) {
 
-    operator fun invoke(hooks: Hooks = Hooks()) {
+    suspend operator fun invoke(hooks: Hooks = Hooks()) {
         val allHooks = GlobalHooks + hooks
 
         logger.debug { "-- Background: ${name ?: "unnamed"}: ${description ?: "no description"}" }
         steps.forEach {
-            it(allHooks)
+            it(allHooks, null)
         }
     }
 }

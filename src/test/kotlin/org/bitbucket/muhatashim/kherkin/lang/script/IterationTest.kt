@@ -23,8 +23,8 @@ val iterationTest =
                         password = "pass" from iteration
                     )
                     Then the `duck is logged in`()
-                    And the `duck sees the homepage`()
                 }
+                And the `duck sees the homepage`()
             }
         }
     }

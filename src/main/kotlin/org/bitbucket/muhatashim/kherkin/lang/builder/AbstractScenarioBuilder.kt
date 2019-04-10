@@ -6,7 +6,7 @@ import org.bitbucket.muhatashim.kherkin.lang.meta.ScenarioMeta
 import org.bitbucket.muhatashim.kherkin.lang.meta.TagMeta
 
 
-@org.bitbucket.muhatashim.kherkin.lang.KherkinDsl
+@KherkinDsl
 abstract class AbstractScenarioBuilder(val callSite: StackTraceElement? = null) {
     var name: String? = null
     var description: String? = null
