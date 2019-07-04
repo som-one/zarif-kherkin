@@ -1,5 +1,6 @@
 package org.bitbucket.muhatashim.kherkin.lang.builder
 
+import kotlinx.coroutines.runBlocking
 import org.bitbucket.muhatashim.kherkin.lang.construct.*
 import org.bitbucket.muhatashim.kherkin.lang.meta.FeatureMeta
 import org.bitbucket.muhatashim.kherkin.lang.meta.TagMeta
@@ -17,29 +18,31 @@ class FeatureBuilder(val callSite: StackTraceElement) {
         background = BackgroundBuilder().apply(setup).build()
     }
 
-    inline fun Example(examples: List<Map<String, *>>, setup: ExampleScenarioBuilder.() -> Unit) {
+    inline fun Example(name: String, examples: List<Map<String, *>>, setup: ExampleScenarioBuilder.() -> Unit) {
         require(!examples.isEmpty()) { "There must be at least one example in the provided examples argument." }
 
         examples.forEach {
             val scenarioCallSite = Thread.currentThread().stackTrace[2]
-            addScenario(ExampleScenarioBuilder(it, scenarioCallSite).apply(setup).build())
+            addScenario(ExampleScenarioBuilder(it, scenarioCallSite).also { it.name = name }.apply(setup).build())
         }
     }
 
-    inline fun Scenario(setup: SimpleScenarioBuilder.() -> Unit) {
+    inline fun Scenario(name: String, setup: SimpleScenarioBuilder.() -> Unit) {
         val scenarioCallSite = Thread.currentThread().stackTrace[2]
-        addScenario(SimpleScenarioBuilder(scenarioCallSite).apply(setup).build())
+        addScenario(SimpleScenarioBuilder(scenarioCallSite).also { it.name = name }.apply(setup).build())
     }
 
-    suspend inline fun fScenario(hooks: Hooks = Hooks(), setup: SimpleScenarioBuilder.() -> Unit) {
+    inline fun fScenario(name: String, hooks: Hooks = Hooks(), setup: SimpleScenarioBuilder.() -> Unit) {
         val allHooks = GlobalHooks + hooks
         val scenarioCallSite = Thread.currentThread().stackTrace[2]
-        SimpleScenarioBuilder(scenarioCallSite).apply(setup).build().also { scenario ->
+        SimpleScenarioBuilder(scenarioCallSite).also { it.name = name }.apply(setup).build().also { scenario ->
             addScenario(scenario)
-            requireNotNull(background) {
-                "Background must be defined before scenario in order to run a specific scenario"
-            }()
-            scenario(allHooks, build())
+            runBlocking {
+                requireNotNull(background) {
+                    "Background must be defined before scenario in order to run a specific scenario"
+                }()
+                scenario(allHooks, build())
+            }
         }
     }
 
@@ -65,9 +68,10 @@ class FeatureBuilder(val callSite: StackTraceElement) {
     }
 }
 
-fun Feature(setup: FeatureBuilder.() -> Unit): FeatureX {
+fun Feature(name: String, setup: FeatureBuilder.() -> Unit): FeatureX {
     val featureCallSite = Thread.currentThread().stackTrace[2]
     FeatureBuilder(featureCallSite).also {
+        it.name = name
         it.setup()
         return it.build()
     }

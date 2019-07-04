@@ -4,10 +4,8 @@ import org.bitbucket.muhatashim.kherkin.lang.builder.*
 import org.bitbucket.muhatashim.kherkin.lang.definition.*
 
 val contextVariables =
-    Feature {
-        name = "Feature to context variables"
-        Scenario {
-            name = "Scenario 1"
+    Feature("Feature to context variables") {
+        Scenario("Scenario 1") {
             steps {
                 Given the `duck has done something cool`()
                 Then the `duck verifies that it has done something cool`()
@@ -16,8 +14,7 @@ val contextVariables =
                 Then the `duck verifies that it has done something cool 2`()
             }
         }
-        Scenario {
-            name = "Scenario 2"
+        Scenario("Scenario 2") {
             steps {
                 Given the `duck verifies that it has not done something cool`()
                 And the `duck verifies that it has not done something cool 2`()

@@ -7,19 +7,8 @@ import org.bitbucket.muhatashim.kherkin.lang.meta.*
 abstract class AbstractStepBuilder {
     protected val steps = mutableListOf<StepX>()
 
-    infix fun StepType.the(step: StepX) {
-        val callSite = Thread.currentThread().stackTrace[2]
-        steps += step.copy(
-            meta = step.meta.copy(
-                keyword = this.name,
-                lineNumber = callSite.lineNumber,
-                result = ResultMeta(status = StatusMeta.skipped)
-            )
-        )
-    }
-
     fun iterate(data: List<Map<String, *>>, setup: IterationBuilder.() -> Unit) {
-        require(!data.isEmpty()) { "There must be at least one item in the provided data argument." }
+        require(data.isNotEmpty()) { "There must be at least one item in the provided data argument." }
 
         data.forEach { datum ->
             IterationBuilder(datum).also {
@@ -31,6 +20,30 @@ abstract class AbstractStepBuilder {
 
     open fun build(): List<StepX> {
         return steps
+    }
+
+    @KherkinDsl
+    val Given = StepType("Given")
+    @KherkinDsl
+    val When = StepType("When")
+    @KherkinDsl
+    val Then = StepType("Then")
+    @KherkinDsl
+    val And = StepType("And")
+    @KherkinDsl
+    val But = StepType("But")
+
+    inner class StepType(val name: String) {
+        infix fun the(step: StepX) {
+            val callSite = Thread.currentThread().stackTrace[2]
+            steps += step.copy(
+                meta = step.meta.copy(
+                    keyword = this.name,
+                    line = callSite.lineNumber,
+                    result = ResultMeta(status = StatusMeta.skipped)
+                )
+            )
+        }
     }
 }
 
@@ -55,16 +68,9 @@ private fun step(
             keyword = "",
             outputs = mutableListOf(),
             match = MatchMeta(
-                arguments = mutableListOf(argumentFromPairs(args)),
                 location = callSite.fileName + '.' + callSite.methodName
-            )
+            ),
+            arguments = mutableListOf(argumentFromPairs(args))
         )
     )
 }
-
-open class StepType(val name: String)
-object Given : StepType("Given")
-object When : StepType("When")
-object Then : StepType("Then")
-object And : StepType("And")
-object But : StepType("But")

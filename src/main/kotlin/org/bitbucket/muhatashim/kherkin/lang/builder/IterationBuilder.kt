@@ -2,15 +2,10 @@ package org.bitbucket.muhatashim.kherkin.lang.builder
 
 import org.bitbucket.muhatashim.kherkin.lang.construct.StepX
 
-@KherkinDsl
 class IterationBuilder(val datum: Map<String, *> = mapOf<String, Any>()) {
     private val steps = mutableListOf<StepX>()
 
-    infix fun StepType.the(step: StepX) {
-        steps += step.copy(datum = this@IterationBuilder.datum)
-    }
-
-    inline infix fun <reified R> String.from(ignored: iteration): R {
+    inline infix fun <reified R> String.from(@Suppress("UNUSED_PARAMETER") ignored: iteration): R {
         val value = requireNotNull(datum[this]) {
             "Could not find variable \"$this\" inside iteration. Current iteration is $datum"
         }

@@ -7,6 +7,5 @@ package org.bitbucket.muhatashim.kherkin.lang.meta
  * Time: 11:20 PM
  */
 data class MatchMeta(
-    var arguments: MutableList<ArgumentMeta>? = null,
     var location: String? = null
 )

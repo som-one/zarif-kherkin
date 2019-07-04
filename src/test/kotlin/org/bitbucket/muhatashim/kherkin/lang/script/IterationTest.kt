@@ -7,15 +7,13 @@ import org.bitbucket.muhatashim.kherkin.lang.definition.`duck is on sign in page
 import org.bitbucket.muhatashim.kherkin.lang.definition.`duck sees the homepage`
 
 val iterationTest =
-    Feature {
-        name = "Feature to test iterations"
+    Feature("Feature to test iterations") {
         Background {
             steps {
                 Given the `duck is on sign in page`()
             }
         }
-        Scenario {
-            name = "Test iterations"
+        Scenario("Test iterations") {
             steps {
                 iterate(csv("/data/user-pass.csv")) {
                     When the `duck enters the following credentials`(

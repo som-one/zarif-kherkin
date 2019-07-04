@@ -1,22 +1,20 @@
 package org.bitbucket.muhatashim.kherkin.lang.script
 
-import org.bitbucket.muhatashim.kherkin.lang.builder.*
+import org.bitbucket.muhatashim.kherkin.lang.builder.Feature
 import org.bitbucket.muhatashim.kherkin.lang.definition.`duck enters the following credentials`
 import org.bitbucket.muhatashim.kherkin.lang.definition.`duck is logged in`
 import org.bitbucket.muhatashim.kherkin.lang.definition.`duck is on sign in page`
 import org.bitbucket.muhatashim.kherkin.lang.definition.`duck sees the homepage`
 
 val backgroundTest =
-    Feature {
-        name = "Feature to test background"
+    Feature("Feature to test background") {
         Background {
             name = "Background name"
             steps {
                 Given the `duck is on sign in page`()
             }
         }
-        Scenario {
-            name = "Scenario 1"
+        fScenario("Scenario 1") {
             steps {
                 When the `duck enters the following credentials`(
                     username = "user",
@@ -26,8 +24,7 @@ val backgroundTest =
                 And the `duck sees the homepage`()
             }
         }
-        Scenario {
-            name = "Scenario 2"
+        Scenario("Scenario 2") {
             steps {
                 When the `duck enters the following credentials`(
                     username = "user2",
