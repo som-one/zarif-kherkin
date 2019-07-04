@@ -1,8 +1,8 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.21'
 }
-group 'org.zarif'
-version '1.2.0-RELEASE'
+group 'one.som'
+version '1.3.0-RELEASE'
 
 repositories {
     mavenCentral()
@@ -56,7 +56,7 @@ if (project.hasProperty("signing.keyId")) {
         publications {
             mavenJava(MavenPublication) {
                 customizePom(pom)
-                groupId 'org.bitbucket.muhatashim'
+                groupId 'one.som'
                 artifactId 'zarif-kherkin'
                 version project.version
 
@@ -130,25 +130,25 @@ def customizePom(pom) {
 
             description 'Kherkin DSL framework for creating gherkin-like feature files with more customizability and flexibility.'
             name 'Kherkin'
-            url 'https://bitbucket.org/Muhatashim/zarif-kherkin/'
+            url 'https://github.com/som-one/zarif-kherkin/'
             organization {
-                name 'org.bitbucket.muhatashim'
-                url 'https://bitbucket.org/Muhatashim'
+                name 'one.som'
+                url 'http://som.one'
             }
             issueManagement {
-                system 'Bitbucket'
-                url 'https://bitbucket.org/Muhatashim/zarif-kherkin/issues'
+                system 'GitHub'
+                url 'https://github.com/som-one/zarif-kherkin/issues'
             }
             licenses {
                 license {
                     name 'MIT License'
-                    url 'https://bitbucket.org/Muhatashim/zarif-kherkin/src/master/LICENSE'
+                    url 'https://github.com/som-one/zarif-kherkin/blob/master/LICENSE'
                     distribution 'repo'
                 }
             }
             scm {
-                url 'https://bitbucket.org/Muhatashim/zarif-kherkin/'
-                connection 'scm:git:git://bitbucket.org/Muhatashim/zarif-kherkin.git'
+                url 'https://github.com/som-one/zarif-kherkin/'
+                connection 'scm:git:git://github.com/som-one/zarif-kherkin.git'
             }
             developers {
                 developer {
