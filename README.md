@@ -7,14 +7,14 @@ Kerkin is a Kotlin based DSL written with testers, developers, and regular peopl
 # Getting Started
 Gradle:
 ```groovy
-testCompile "org.bitbucket.muhatashim:zarif-kherkin:1.2.0-RELEASE"
+testCompile "one.som:zarif-kherkin:1.3.0-RELEASE"
 ```
 Maven:
 ```xml
 <dependency>
-  <groupId>org.bitbucket.muhatashim</groupId>
+  <groupId>one.som</groupId>
   <artifactId>zarif-kherkin</artifactId>
-  <version>1.2.0-RELEASE</version>
+  <version>1.3.0-RELEASE</version>
 </dependency>
 ```
 
