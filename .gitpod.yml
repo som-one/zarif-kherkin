@@ -1,2 +1,10 @@
+image:
+  file: .gitpod.Dockerfile
+
 tasks:
   - init: ./gradlew build
+
+vscode:
+  extensions:
+    - mathiasfrohlich.Kotlin@1.7.1:zRxka5i+6/G9r7KC3xmyXQ==
+    - Pivotal.vscode-spring-boot@1.20.0:jaH7mimG3KKfktrKqHw8Kg==
