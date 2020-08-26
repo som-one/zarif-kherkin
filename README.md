@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/som-one/zarif-kherkin)
+
 ![Bitbucket Pipelines branch](https://img.shields.io/bitbucket/pipelines/Muhatashim/zarif-kherkin/master.svg?label=master)
 ![Maven Central](https://img.shields.io/maven-central/v/org.bitbucket.muhatashim/zarif-kherkin.svg?label=zarif-kherkin)
       
